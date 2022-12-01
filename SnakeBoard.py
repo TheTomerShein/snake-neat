@@ -1,3 +1,4 @@
+import datetime
 import math
 
 import neat.nn
@@ -35,40 +36,42 @@ class SnakeBoard:
     def train_ai(self, genome1, config, player, candy):
         nn = neat.nn.FeedForwardNetwork.create(genome1, config)
         clock = pygame.time.Clock()
+        start_time = datetime.datetime.now().second
 
         while True:
-            clock.tick(20)
+            clock.tick(1000)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-
-            # nn_output = nn.activate(
-            #     (abs(player.index_x - candy.index_x),
-            #      abs(player.index_y - candy.index_y)))
-            # nn_decision = nn_output.index(max(nn_output))
             nn_output = nn.activate(
-                [math.sqrt((player.index_x - candy.index_x) ** 2 + (player.index_y - candy.index_y) ** 2),
-                 abs(player.index_x - candy.index_x),
-                 abs(player.index_y - candy.index_y), ])
+                [player.index_x,
+                 player.index_y,
+                 math.sqrt((player.index_x - candy.index_x) ** 2 + (player.index_y - candy.index_y) ** 2),
+                 candy.index_x,
+                 candy.index_y,
+                 player.moving_side_to_int(),
+                 math.atan2((player.index_x - candy.index_x), (player.index_y - candy.index_y))])
             nn_decision = nn_output.index(max(nn_output))
             player.handle_keys_ai(nn_decision)
 
-            # print(nn_output)
-
             self.building_net()
-            player.handle_keys()
             player.draw(self.screen_pointer)
             candy.draw(self.screen_pointer)
             pygame.display.update()
 
-            if player.handle_touching_limits() or player.handle_head_and_body_collision() or player.score > 20:
-                genome1.fitness += player.score
-                print(player.score)
+            if player.handle_touching_limits() or player.handle_head_and_body_collision():
+                genome1.fitness -= 5
+                print(genome1.fitness)
+                break
+
+            if datetime.datetime.now().second - start_time >= 10:
+                genome1.fitness -= 10
+                print(genome1.fitness)
                 break
 
             if food_collision(player, candy):
-                player.score += 1
+                genome1.fitness += 20
                 candy.kill()
                 candy.respawn(self.screen_pointer, player)
                 player.increase_body()

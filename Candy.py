@@ -14,7 +14,7 @@ class Candy:
         self.color = (255, 0, 0)
         self.index_x = random.randint(0, max_w - 1)
         self.index_y = random.randint(0, max_h - 1)
-        print("ball - ", self.index_x, self.index_y)
+        # print("ball - ", self.index_x, self.index_y)
         self.player_rect = pygame.draw.rect(screen, self.color,
                                             (self.index_x * self.sx,
                                              self.index_y * self.sy,

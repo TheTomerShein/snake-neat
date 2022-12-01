@@ -13,7 +13,6 @@ class Player:
         self.index_x = random.randint(0, self.max_w - 1)
         self.index_y = random.randint(0, self.max_h - 1)
         self.sticky_note = None
-        print("player - ", self.index_x, self.index_y)
         self.player_rect = pygame.draw.rect(screen, self.color,
                                             (self.index_x * self.sx,
                                              self.index_y * self.sy,
@@ -64,7 +63,6 @@ class Player:
         self.body.insert(0, (self.index_x * self.sx, self.index_y * self.sy))
 
     def handle_keys_ai(self, index):
-        key = pygame.key.get_pressed()
         if index == 0 and self.sticky_note != 'right':
             self.index_x -= 1
             self.sticky_note = 'left'
@@ -88,6 +86,17 @@ class Player:
 
         self.body.pop()
         self.body.insert(0, (self.index_x * self.sx, self.index_y * self.sy))
+
+    def moving_side_to_int(self):
+        if self.sticky_note == 'up':
+            return 0
+        if self.sticky_note == 'down':
+            return 1
+        if self.sticky_note == 'left':
+            return 2
+        if self.sticky_note == 'right':
+            return 3
+        return -1
 
     def increase_body(self):
         self.body.append(self.body[-1])

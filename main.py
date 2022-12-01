@@ -1,3 +1,5 @@
+import pickle
+
 import neat
 import os
 import pygame
@@ -39,11 +41,12 @@ def run(config_file):
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
-    p.add_reporter(neat.Checkpointer(5))
+    # p.add_reporter(neat.Checkpointer(5))
 
     # Run for up to 50 generations.
-    p.run(eval_genomes, 300)
-
+    winner = p.run(eval_genomes, 5)
+    print(winner)
+    pickle.dump(winner, open("winner.pkl", "wb"))
     # Display the winning genome.
     # print('\nBest genome:\n{!s}'.format(winner))
 
