@@ -19,7 +19,6 @@ class Player:
                                              self.sx,
                                              self.sy), 0)
         self.body = [(self.index_x * self.sx, self.index_y * self.sy)]
-        self.last_move = []
 
     def draw(self, screen):
         for x, y in self.body:
@@ -35,32 +34,6 @@ class Player:
         if self.index_x >= self.max_w or self.index_x < 0 or self.index_y >= self.max_h or self.index_y < 0:
             return True
         return False
-
-    def handle_keys(self):
-        key = pygame.key.get_pressed()
-        if key[pygame.K_LEFT] and self.sticky_note != 'right':
-            self.index_x -= 1
-            self.sticky_note = 'left'
-        elif key[pygame.K_RIGHT] and self.sticky_note != 'left':
-            self.index_x += 1
-            self.sticky_note = 'right'
-        elif key[pygame.K_UP] and self.sticky_note != 'down':
-            self.index_y -= 1
-            self.sticky_note = 'up'
-        elif key[pygame.K_DOWN] and self.sticky_note != 'up':
-            self.index_y += 1
-            self.sticky_note = 'down'
-        elif self.sticky_note == 'right':
-            self.index_x += 1
-        elif self.sticky_note == 'left':
-            self.index_x -= 1
-        elif self.sticky_note == 'up':
-            self.index_y -= 1
-        elif self.sticky_note == 'down':
-            self.index_y += 1
-
-        self.body.pop()
-        self.body.insert(0, (self.index_x * self.sx, self.index_y * self.sy))
 
     def handle_keys_ai(self, index):
         if index == 0 and self.sticky_note != 'right':

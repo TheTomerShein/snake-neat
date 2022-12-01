@@ -41,14 +41,13 @@ def run(config_file):
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
-    # p.add_reporter(neat.Checkpointer(5))
-
-    # Run for up to 50 generations.
-    winner = p.run(eval_genomes, 5)
+    p.add_reporter(neat.Checkpointer(5))
+    # genome = pickle.load(open('winner.pkl', 'rb'))
+    # genomes = [(1, genome)]
+    # eval_genomes(genomes, config)
+    winner = p.run(eval_genomes, 300)
     print(winner)
     pickle.dump(winner, open("winner.pkl", "wb"))
-    # Display the winning genome.
-    # print('\nBest genome:\n{!s}'.format(winner))
 
 
 if __name__ == '__main__':

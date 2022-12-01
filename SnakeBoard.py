@@ -36,7 +36,7 @@ class SnakeBoard:
     def train_ai(self, genome1, config, player, candy):
         nn = neat.nn.FeedForwardNetwork.create(genome1, config)
         clock = pygame.time.Clock()
-        start_time = datetime.datetime.now().second
+        start_time = datetime.datetime.now()
 
         while True:
             clock.tick(1000)
@@ -65,7 +65,8 @@ class SnakeBoard:
                 print(genome1.fitness)
                 break
 
-            if datetime.datetime.now().second - start_time >= 10:
+            if datetime.datetime.now().second - start_time.second >= 15 or \
+                    datetime.datetime.now().minute - start_time.minute >= 1:
                 genome1.fitness -= 10
                 print(genome1.fitness)
                 break
