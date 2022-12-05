@@ -73,3 +73,36 @@ class Player:
 
     def increase_body(self):
         self.body.append(self.body[-1])
+
+    def getX(self):
+        return self.index_x
+
+    def getY(self):
+        return self.index_y
+
+    def getDistanceFromRightWall(self):
+        return self.max_w - self.index_x
+
+    def getDistanceFromLeftWall(self):
+        return self.index_x
+
+    def getDistanceFromTopWall(self):
+        return self.index_y
+
+    def getDistanceFromBottomWall(self):
+        return self.max_h - self.index_y
+
+    def increaseScore(self):
+        self.score += 1
+
+    def distanceFromUpperWall(self):
+        return self.index_y
+
+    def distanceFromBottomWall(self):
+        return self.max_h - self.index_y
+
+    def distanceFromLeftWall(self):
+        return self.index_x
+
+    def distanceFromRightWall(self):
+        return self.max_w - self.index_x
