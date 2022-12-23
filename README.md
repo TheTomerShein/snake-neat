@@ -1,6 +1,6 @@
 <h1 align="center">Snake-NEAT</h1><br>
 <p align="center">
-  <img alt="Snake-NEAT" title="Snake-NEAT" src="https://i.imgur.com/BDdGfBC.gif" width="450"><br>
+  <img alt="Snake-NEAT" title="Snake-NEAT" src="https://user-images.githubusercontent.com/94694895/209307089-d58b8b2c-af66-485a-a187-35c1d4f24717.gif" width="450"><br>
 </p>
 
 <h4 align="center">A self-learning snake game implemented using genetic NEAT algorithm (NeuroEvolution of Augmenting Topologies)</h4>
@@ -51,7 +51,7 @@ python main.py
 > You can see those inputs in SnakeBoard.py
 
 <p align="center">
-  <img alt="Debug Mode" title="Debug Mode" src="https://i.imgur.com/m60tMox.gif" width="450"><br>
+  <img alt="Training Mode" title="Training Mode" src="https://user-images.githubusercontent.com/94694895/209309634-d521e192-3d14-48b6-97de-177ff75d60ff.gif" width="450"><br>
 </p>
 
 ## Outputs
