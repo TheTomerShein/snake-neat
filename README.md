@@ -29,30 +29,26 @@ python main.py
 * **[neat-python](https://github.com/CodeReclaimers/neat-python)**: NeuroEvolution of Augmenting Topologies (NEAT) is a genetic algorithm (GA) for the generation of evolving artificial 
                                                                     neural networks (a neuroevolution technique) developed by Kenneth Stanley .
 
-## Fitness function
+## Fitness function (in SnakeBoard.py)
 
-```python
-SnakeLength - TurnedQuantity * 0.01
-```
+* If we detect a collision between snake's head to the wall - Decreasing fitness by 10 points.
 
-* **SnakeLength**: Snake length defined by how many apples it ate
+* If we detect a collision between snake's head to his body - Decreasing fitness by 10 points.
 
-* **TurnedQuantity**: How many times did the snake change direction, either left or right
+* If we detect that the snake is eating food (candy) - Increasing fitness by 20 points.
 
 ## Inputs
 
-1. **cd_left**: Collision-free units at left
-2. **cd_top**: Collision-free units at top
-3. **cd_right**: Collision-free units at right
-4. **cd_bottom**: Collision-free units at bottom
-5. **cd_top_left**: Collision-free units at top left
-6. **cd_top_right**: Collision-free units at top right
-7. **cd_bottom_left**: Collision-free units at bottom left
-8. **cd_bottom_right**: Collision-free units at bottom right
-9. **apple_x_distance**: If there is an apple on the right or left, this variable contains the distance in units to the apple
-10. **apple_y_distance**: If there is an apple on the top or bottom, this variable contains the distance in units to the apple
+1. **player.getX**: location of player in axis x
+2. **player.getY**: location of player in axis y
+3. **player.getDirection**: get direction of the snake (up, down..)
+4. **player.getDistanceFromCandy**: get snake's distance from candy
+5. **player.getAngleFromCandy**: get the angle between them
+6. **player.isFoodUp\Down\Left\Right**: where is the food (candy)
+7. **player.isMyEntireUp\Down\Left\RightClear**: check where is the snake's body
+8. **player.getDistanceFromLeft\Right\Top\BottomWall**: get the distance between snake's head to each wall
 
-> You can "see" these inputs in debug mode
+> You can see those inputs in SnakeBoard.py
 
 <p align="center">
   <img alt="Debug Mode" title="Debug Mode" src="https://i.imgur.com/m60tMox.gif" width="450"><br>
@@ -60,6 +56,7 @@ SnakeLength - TurnedQuantity * 0.01
 
 ## Outputs
 
-* **0**: Don't change direction
+* **0**: Turn left
 * **1**: Turn right
-* **2**: Turn left
+* **2**: Turn up
+* **3**: Turn down
