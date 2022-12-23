@@ -1,3 +1,4 @@
+import math
 import random
 import pygame
 
@@ -60,16 +61,16 @@ class Player:
         self.body.pop()
         self.body.insert(0, (self.index_x * self.sx, self.index_y * self.sy))
 
-    def moving_side_to_int(self):
+    def getDirection(self):
         if self.sticky_note == 'up':
-            return 0
-        if self.sticky_note == 'down':
             return 1
-        if self.sticky_note == 'left':
+        if self.sticky_note == 'down':
             return 2
-        if self.sticky_note == 'right':
+        if self.sticky_note == 'left':
             return 3
-        return -1
+        if self.sticky_note == 'right':
+            return 4
+        return 5
 
     def increase_body(self):
         self.body.append(self.body[-1])
@@ -80,29 +81,96 @@ class Player:
     def getY(self):
         return self.index_y
 
-    def getDistanceFromRightWall(self):
-        return self.max_w - self.index_x
-
-    def getDistanceFromLeftWall(self):
-        return self.index_x
-
-    def getDistanceFromTopWall(self):
-        return self.index_y
-
-    def getDistanceFromBottomWall(self):
-        return self.max_h - self.index_y
-
     def increaseScore(self):
         self.score += 1
 
-    def distanceFromUpperWall(self):
-        return self.index_y
+    def food_collision(self, c):
+        if self.getX() == c.getX() and self.getY() == c.getY():
+            return True
+        return False
 
-    def distanceFromBottomWall(self):
-        return self.max_h - self.index_y
+    def getAngleFromCandy(self, c):
+        return math.atan2((self.index_x - c.index_x), (self.index_y - c.index_y))
 
-    def distanceFromLeftWall(self):
-        return self.index_x
+    def getDistanceFromCandy(self, c):
+        return math.sqrt((self.index_x - c.index_x) ** 2 + (self.index_y - c.index_y) ** 2)
 
-    def distanceFromRightWall(self):
-        return self.max_w - self.index_x
+    def isFoodUp(self, c) -> int:
+        if self.index_y > c.index_y:
+            return 0
+        return 1
+
+    def isFoodDown(self, c) -> int:
+        if self.index_y < c.index_y:
+            return 0
+        return 1
+
+    def isFoodLeft(self, c) -> int:
+        if self.index_x > c.index_x:
+            return 0
+        return 1
+
+    def isFoodRight(self, c) -> int:
+        if self.index_x < c.index_x:
+            return 0
+        return 1
+
+    def getDistanceFromLeftWall(self) -> int:
+        return math.dist((self.index_x, self.index_y), (0, self.index_y)) / 10
+
+    def getDistanceFromRightWall(self) -> int:
+        return math.dist((self.index_x, self.index_y), (self.max_w, self.index_y)) / 10
+
+    def getDistanceFromTopWall(self) -> int:
+        return math.dist((self.index_x, self.index_y), (self.index_x, 0)) / 10
+
+    def getDistanceFromBottomWall(self) -> int:
+        return math.dist((self.index_x, self.index_y), (self.max_w, self.max_h)) / 10
+
+    def isMyEntireDownClear(self) -> int:
+        for x, y in self.body:
+            if x == self.index_x and y > self.index_y:
+                return 0
+        return 1
+
+    def isMyEntireUpClear(self) -> int:
+        for x, y in self.body:
+            if x == self.index_x and y < self.index_y:
+                return 0
+        return 1
+
+    def isMyEntireLeftClear(self) -> int:
+        for x, y in self.body:
+            if y == self.index_y and x < self.index_x:
+                return 0
+        return 1
+
+    def isMyEntireRightClear(self) -> int:
+        for x, y in self.body:
+            if y == self.index_y and x > self.index_x:
+                return 0
+        return 1
+
+    def isMyEntireTopLeftClear(self) -> int:
+        for x, y in self.body:
+            if x + y < self.index_x + self.index_y:
+                return 0
+        return 1
+
+    def isMyEntireTopRightClear(self) -> int:
+        for x, y in self.body:
+            if x + y > self.index_x + self.index_y:
+                return 0
+        return 1
+
+    def isMyEntireBottomLeftClear(self) -> int:
+        for x, y in self.body:
+            if x + y > self.index_x + self.index_y:
+                return 0
+        return 1
+
+    def isMyEntireBottomRightClear(self) -> int:
+        for x, y in self.body:
+            if x + y < self.index_x + self.index_y:
+                return 0
+        return 1

@@ -1,4 +1,5 @@
 import datetime
+import math
 import random
 import threading
 import pygame
@@ -56,15 +57,3 @@ class Candy:
 
     def getY(self):
         return self.index_y
-
-    def getDistanceFromRightWall(self):
-        return self.max_w - self.index_x
-
-    def getDistanceFromLeftWall(self):
-        return self.index_x
-
-    def getDistanceFromTopWall(self):
-        return self.index_y
-
-    def getDistanceFromBottomWall(self):
-        return self.max_h - self.index_y
