@@ -1,7 +1,4 @@
-import datetime
-import math
 import random
-import threading
 import pygame
 
 

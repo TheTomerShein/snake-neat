@@ -1,6 +1,4 @@
 import pickle
-import statistics
-
 import neat
 import os
 import pygame

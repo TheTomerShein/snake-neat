@@ -1,6 +1,3 @@
-import datetime
-import math
-import time
 import neat.nn
 import pygame
 
