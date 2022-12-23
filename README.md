@@ -9,6 +9,10 @@
 
 Project developed for fun and acquiring knowledge while serving in the army.
 
+## Project
+
+After 1500 generations snake's best score was 70 apples.
+
 ## How to run
 
 Install dependencies
